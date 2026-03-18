@@ -1,6 +1,6 @@
 # RecipeShare
 
-RecipeShare is a web application built with Spring Boot that allows users to create, search, and share recipes. The goal of RecipeShare is to provide an easy-to-use platform for discovering new recipes, sharing your own, and connecting with other cooking enthusiasts.
+RecipeShare is a web application built with Flask and React that allows users to create, search, and share recipes. The goal of RecipeShare is to provide an easy-to-use platform for discovering new recipes, sharing your own, and connecting with other cooking enthusiasts.
 
 ## Goals
 
@@ -20,8 +20,8 @@ RecipeShare is a web application built with Spring Boot that allows users to cre
 
 ### Prerequisites
 
-- Java 17 or higher
-- Maven 3.8+
+- Python 3.13 or higher
+- Flask
 - Git
 
 ### Steps
