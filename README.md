@@ -142,4 +142,93 @@ Example body:
 }
 ```
 
+---
+
+## 8. Examining Database Changes
+
+Use `psql` to inspect the database directly as you interact with the API. This helps you understand how HTTP requests translate into real database operations.
+
+### Open a psql session
+
+```bash
+psql -U postgres -d recipeshare
+```
+
+> Replace `postgres` with your PostgreSQL username if different.
+
+---
+
+### View existing data
+
+```sql
+-- See all users
+SELECT * FROM users;
+
+-- See all recipes
+SELECT * FROM recipes;
+
+-- See recipes with their owner's name
+SELECT recipes.id, recipes.title, users.username
+FROM recipes
+JOIN users ON recipes.user_id = users.id;
+```
+
+---
+
+### After adding a record (POST)
+
+1. Make a `POST /api/recipes` request (via curl, Postman, or your frontend).
+2. In psql, run:
+
+```sql
+SELECT * FROM recipes ORDER BY id DESC LIMIT 5;
+```
+
+You should see the new recipe at the top of the results.
+
+---
+
+### After updating a record (PUT / PATCH)
+
+1. Make an update request to modify a recipe.
+2. In psql, confirm the change:
+
+```sql
+SELECT id, title, description, prep_time FROM recipes WHERE id = <your_recipe_id>;
+```
+
+Compare the values before and after your request to verify the update was applied.
+
+---
+
+### After deleting a record (DELETE)
+
+1. Make a `DELETE` request for a specific recipe.
+2. In psql, confirm the row is gone:
+
+```sql
+SELECT * FROM recipes WHERE id = <your_recipe_id>;
+```
+
+You should get **0 rows** back if the delete was successful.
+
+---
+
+### Tip: count rows
+
+A quick way to check how many records exist before and after an operation:
+
+```sql
+SELECT COUNT(*) FROM recipes;
+SELECT COUNT(*) FROM users;
+```
+
+---
+
+### Exit psql
+
+```bash
+\q
+```
+
 
